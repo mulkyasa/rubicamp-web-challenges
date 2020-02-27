@@ -1,0 +1,16 @@
+[
+   {
+      "string": "Testing Data",
+      "integer": "12",
+      "float": "1.45",
+      "date": "12 Desember 2017",
+      "boolean": "true"
+   },
+   {
+      "string": "Romie Agung Nugraha",
+      "integer": "25 tahun",
+      "float": "Nilai A",
+      "date": "11 Desember 2017",
+      "boolean": "false"
+   }
+]

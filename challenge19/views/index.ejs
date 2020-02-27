@@ -21,7 +21,7 @@
             </div>
             <div class="col-10">
                 <div class="form-group">
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="ID">
+                    <input type="text" class="form-control" placeholder="ID">
                 </div>
             </div>
         </div>
@@ -36,7 +36,7 @@
             </div>
             <div class="col-10">
                 <div class="form-group">
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="String">
+                    <input type="text" class="form-control" placeholder="String">
                 </div>
             </div>
         </div>
@@ -51,7 +51,7 @@
             </div>
             <div class="col-10">
                 <div class="form-group">
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Integer">
+                    <input type="text" class="form-control" placeholder="Integer">
                 </div>
             </div>
         </div>
@@ -66,12 +66,12 @@
             </div>
             <div class="col-10">
                 <div class="form-group">
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Float">
+                    <input type="text" class="form-control" placeholder="Float">
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col">
+            <div class="col-2">
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
                     <label class="form-check-label" for="defaultCheck1">
@@ -79,15 +79,17 @@
                     </label>
                 </div>
             </div>
-            <div class="col col-3">
+            <div class="col-3">
                 <div class="form-group">
-                    <input type="date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <input type="date" class="form-control">
                 </div>
             </div>
-            <p>to</p>
-            <div class="col col-3">
+            <div class="w-100"></div>
+            <p class="col offset-2">to</p>
+            <div class="w-100"></div>
+            <div class="col-3 offset-2">
                 <div class="form-group">
-                    <input type="date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <input type="date" class="form-control">
                 </div>
             </div>
         </div>
@@ -106,52 +108,52 @@
                         <option selected>Choose the boolean ...</option>
                         <option value="1">True</option>
                         <option value="2">False</option>
-                      </select>
-                  </div>
+                    </select>
+                </div>
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Search</button>
         <table class="table table-striped mt-4">
             <thead>
-              <tr>
-                <th scope="col">ID</th>
-                <th scope="col">String</th>
-                <th scope="col">Integer</th>
-                <th scope="col">Float</th>
-                <th scope="col">Date</th>
-                <th scope="col">Boolean</th>
-                <th scope="col">Actions</th>
-              </tr>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">String</th>
+                    <th scope="col">Integer</th>
+                    <th scope="col">Float</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Boolean</th>
+                    <th scope="col">Actions</th>
+                </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Testing Data</td>
-                <td>12</td>
-                <td>1.45</td>
-                <td>12 Desember 2017</td>
-                <td>True</td>
-                <td>
-                    <a href="edit.ejs">
-                        <button type="button" class="btn btn-success">Edit</button>
-                    </a>
-                    <button type="button" class="btn btn-danger">Delete</button>
-                </td>
-              </tr>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Testing Data</td>
+                    <td>12</td>
+                    <td>1.45</td>
+                    <td>12 Desember 2017</td>
+                    <td>True</td>
+                    <td>
+                        <a href="edit">
+                            <button type="button" class="btn btn-success">Edit</button>
+                        </a>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
             </tbody>
         </table>
-        <a href="add.ejs">
-            <button type="button" class="btn btn-primary mb-4">Add</button>
-        </a>
         <nav aria-label="Page navigation example mt-2">
             <ul class="pagination">
-              <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
             </ul>
         </nav>
+        <a href="add">
+            <button type="button" class="btn btn-primary mb-4">Add</button>
+        </a>
     </div>
 </body>
 </html>

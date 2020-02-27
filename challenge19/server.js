@@ -9,4 +9,12 @@ app.get('/', function (req, res) {
   res.render('index', {data: 'data'})
 })
 
+app.get('/add', function (req, res) {
+  res.render('add', {data: 'data'})
+})
+
+app.get('/edit', function (req, res) {
+  res.render('edit' , {data: 'data'})
+})
+
 app.listen(3000)

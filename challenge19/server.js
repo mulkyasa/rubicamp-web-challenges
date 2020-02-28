@@ -29,7 +29,7 @@ app.post('/add', (req, res) => {
     float: req.body.float,
     date: req.body.date,
     boolean: req.body.boolean
-  })
+  });
   writeData(data);
   res.redirect('/');
 })

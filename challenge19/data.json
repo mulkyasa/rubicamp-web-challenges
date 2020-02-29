@@ -1,9 +1,9 @@
 [
    {
-      "string": "Testing Data",
-      "integer": "12",
-      "float": "1.45",
-      "date": "12 Desember 2017",
+      "string": "Feeling Good",
+      "integer": "13",
+      "float": "4.56",
+      "date": "2020-02-01",
       "boolean": "true"
    }
 ]

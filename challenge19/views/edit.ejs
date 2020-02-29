@@ -9,103 +9,97 @@
 <body>
     <div class="container">
         <h2>Edit Data</h2>
-        <div class="row">
-            <div class="col">
-                <div class="form-check">
-                    <label class="form-check-label" for="defaultCheck1">
-                    ID
-                    </label>
+        <form action="" method="POST">
+            <div class="row">
+                <div class="col">
+                    <div class="form-check">
+                        <label class="form-check-label" for="id">
+                        ID
+                        </label>
+                    </div>
+                </div>
+                <div class="col-10">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="id" name="id" placeholder="ID" value="<%= Number(id) + 1 %>" readonly>
+                    </div>
                 </div>
             </div>
-            <div class="col-10">
-                <div class="form-group">
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="ID" readonly>
+            <div class="row">
+                <div class="col">
+                    <div class="form-check">
+                        <label class="form-check-label" for="string">
+                        String
+                        </label>
+                    </div>
+                </div>
+                <div class="col-10">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="string" name="string" value="<%= item.string %>" placeholder="String">
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="form-check">
-                    <label class="form-check-label" for="defaultCheck1">
-                    String
-                    </label>
+            <div class="row">
+                <div class="col">
+                    <div class="form-check">
+                        <label class="form-check-label" for="integer">
+                        Integer
+                        </label>
+                    </div>
+                </div>
+                <div class="col-10">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="integer" name="integer" value="<%= item.integer %>" placeholder="Integer">
+                    </div>
                 </div>
             </div>
-            <div class="col-10">
-                <div class="form-group">
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="String">
+            <div class="row">
+                <div class="col">
+                    <div class="form-check">
+                        <label class="form-check-label" for="float">
+                        Float
+                        </label>
+                    </div>
+                </div>
+                <div class="col-10">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="float" name="float" value="<%= item.float %>" placeholder="Float">
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="form-check">
-                    <label class="form-check-label" for="defaultCheck1">
-                    Integer
-                    </label>
+            <div class="row">
+                <div class="col-2">
+                    <div class="form-check">
+                        <label class="form-check-label" for="date">
+                        Date
+                        </label>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-group">
+                        <input type="date" class="form-control" id="date" name="date" value="<%= item.date %>">
+                    </div>
                 </div>
             </div>
-            <div class="col-10">
-                <div class="form-group">
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Integer">
+            <div class="row">
+                <div class="col">
+                    <div class="form-check">
+                        <label class="form-check-label" for="boolean">
+                        Boolean
+                        </label>
+                    </div>
+                </div>
+                <div class="col-10">
+                    <div class="form-group">
+                        <select id="boolean" class="custom-select custom-select" name="boolean" value="<%= item.boolean %>">
+                            <option selected>Choose the boolean ...</option>
+                            <option>true</option>
+                            <option>false</option>
+                        </select>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="form-check">
-                    <label class="form-check-label" for="defaultCheck1">
-                    Float
-                    </label>
-                </div>
-            </div>
-            <div class="col-10">
-                <div class="form-group">
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Float">
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-2">
-                <div class="form-check">
-                    <label class="form-check-label" for="defaultCheck1">
-                    Date
-                    </label>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="form-group">
-                    <input type="date" class="form-control">
-                </div>
-            </div>
-            <div class="w-100"></div>
-            <p class="col offset-2">to</p>
-            <div class="w-100"></div>
-            <div class="col-3 offset-2">
-                <div class="form-group">
-                    <input type="date" class="form-control">
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="form-check">
-                    <label class="form-check-label" for="defaultCheck1">
-                    Boolean
-                    </label>
-                </div>
-            </div>
-            <div class="col-10">
-                <div class="form-group">
-                    <select class="custom-select custom-select">
-                        <option selected>Choose the boolean ...</option>
-                        <option value="1">True</option>
-                        <option value="2">False</option>
-                    </select>
-                </div>
-            </div>
-        </div>
         <button type="submit" class="btn btn-primary">Update</button>
+        </form>
     </div>
 </body>
 </html>

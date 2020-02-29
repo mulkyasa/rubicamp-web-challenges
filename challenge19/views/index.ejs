@@ -107,8 +107,8 @@
                     <div class="form-group">
                         <select class="custom-select custom-select">
                             <option selected>Choose the boolean ...</option>
-                            <option value="1">True</option>
-                            <option value="2">False</option>
+                            <option value="true">true</option>
+                            <option value="false">false</option>
                         </select>
                     </div>
                 </div>
@@ -137,10 +137,12 @@
                             <td><%= item.date %></td>
                             <td><%= item.boolean %></td>
                             <td>
-                                <a href="edit">
+                                <a href="/edit/<%= index %>">
                                     <button type="button" class="btn btn-success">Edit</button>
                                 </a>
-                                <button type="button" class="btn btn-danger">Delete</button>
+                                <a href="/delete/<%= index %>">
+                                    <button type="button" class="btn btn-danger">Delete</button>
+                                </a>
                             </td>
                         </tr>
                     <% }) %>

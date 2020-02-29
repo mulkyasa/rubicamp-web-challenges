@@ -15,7 +15,7 @@ app.set('view engine', 'ejs')
 
 app.get('/', (req, res) => {
   res.render('index', {data:data})
-})
+});
 
 app.get('/add', (req, res) => {
   res.render('add')
@@ -32,11 +32,33 @@ app.post('/add', (req, res) => {
   });
   writeData(data);
   res.redirect('/');
-})
+});
 
-app.get('/edit', (req, res) => {
-  res.render('edit')
-})
+app.get('/edit/:id', (req, res) => {
+  let id = req.params.id;
+  res.render('edit', {item:{...data[id]}, id});
+});
+
+app.post('/edit/:id', (req, res) => {
+  let id = req.params.id;
+  const newValue = {
+    string: req.body.string,
+    integer: req.body.integer,
+    float: req.body.float,
+    date: req.body.date,
+    boolean: req.body.boolean
+  };
+  data.splice(id, 1, newValue);
+  writeData(data);
+  res.redirect('/');
+});
+
+app.get('/delete/:id', (req, res) => {
+  let id = req.params.id;
+  data.splice(id, 1);
+  writeData(data);
+  res.redirect('/');
+});
 
 app.listen(3000, () => {
   console.log('This web working on port 3000')

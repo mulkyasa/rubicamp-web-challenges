@@ -6,7 +6,7 @@ const writeData = (data) => {fs.writeFileSync('data.json', JSON.stringify(data, 
 const app = express();
 var bodyParser = require('body-parser');
 
-app.use('/', express.static(path.join(__dirname, 'views')));
+app.use('/', express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 

@@ -7,5 +7,8 @@ CREATE TABLE IF NOT EXISTS data (
     boolean VARCHAR(5) NOT NULL
 );
 
-INSERT INTO data (id, string, integer, float, date, boolean) VALUES 
-(1, 'Testing data', '6', '4.89', '22-04-2019', 'true');
+INSERT INTO data (string, integer, float, date, boolean) VALUES
+('Testing data', '6', '4.89', '22-04-2019', 'true');
+
+INSERT INTO data (string, integer, float, date, boolean) VALUES
+('Check data', '2', '6.43', '23-05-1998', 'false');

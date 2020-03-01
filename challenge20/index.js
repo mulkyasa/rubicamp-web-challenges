@@ -20,11 +20,26 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
-    let sql = `SELECT * FROM data`;
+    const sql = `SELECT * FROM data`;
     db.all(sql, (err, row) => {
         if (err) throw err;
 
         res.render('index', {row});
+    });
+});
+
+app.get('/add', (req, res) => {
+    res.render('add');
+});
+
+app.post('/add', (req, res) => {
+    const sql = `INSERT INTO data (string, integer, float, date, boolean) VALUES (?, ?, ?, ?, ?)`;
+    const {string, integer, float, date, boolean} = req.body;
+
+    db.run(sql, req.body, err => {
+        if (err) throw err;
+
+        res.redirect('/');
     });
 });
 

@@ -91,9 +91,9 @@
                 <div class="col-10">
                     <div class="form-group">
                         <select id="boolean" class="custom-select custom-select" name="boolean" value="<%= item.boolean %>">
-                            <option selected>Choose the boolean ...</option>
-                            <option>true</option>
-                            <option>false</option>
+                            <option>Choose the boolean ...</option>
+                            <option value="true" <%= item.boolean == 'true' ? 'selected' : '' %></option>>true</option>
+                            <option value="false" <%= item.boolean == 'false' ? 'selected' : '' %></option>>false</option>
                         </select>
                     </div>
                 </div>

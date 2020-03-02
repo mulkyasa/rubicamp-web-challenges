@@ -20,7 +20,7 @@
                 </div>
                 <div class="col-10">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="id" name="id" placeholder="ID" value="" readonly>
+                        <input type="text" class="form-control" id="id" name="id" placeholder="ID" value="<%= item.id %>" readonly>
                     </div>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                 </div>
                 <div class="col-10">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="string" name="string" value="" placeholder="String">
+                        <input type="text" class="form-control" id="string" name="string" value="<%= item.string %>" placeholder="String">
                     </div>
                 </div>
             </div>
@@ -48,7 +48,7 @@
                 </div>
                 <div class="col-10">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="integer" name="integer" value="" placeholder="Integer">
+                        <input type="text" class="form-control" id="integer" name="integer" value="<%= item.integer %>" placeholder="Integer">
                     </div>
                 </div>
             </div>
@@ -62,7 +62,7 @@
                 </div>
                 <div class="col-10">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="float" name="float" value="" placeholder="Float">
+                        <input type="text" class="form-control" id="float" name="float" value="<%= item.float %>" placeholder="Float">
                     </div>
                 </div>
             </div>
@@ -76,7 +76,7 @@
                 </div>
                 <div class="col-3">
                     <div class="form-group">
-                        <input type="date" class="form-control" id="date" name="date" value="">
+                        <input type="date" class="form-control" id="date" name="date" value="<%= item.date %>">
                     </div>
                 </div>
             </div>
@@ -90,10 +90,10 @@
                 </div>
                 <div class="col-10">
                     <div class="form-group">
-                        <select id="boolean" class="custom-select custom-select" name="boolean" value="">
-                            <option selected>Choose the boolean ...</option>
-                            <option>true</option>
-                            <option>false</option>
+                        <select id="boolean" class="custom-select custom-select" name="boolean">
+                            <option>Choose the boolean ...</option>
+                            <option value="true" <%= item.boolean == 'true' ? 'selected' : '' %>>true</option>
+                            <option value="false" <%= item.boolean == 'false' ? 'selected' : '' %>>false</option>
                         </select>
                     </div>
                 </div>

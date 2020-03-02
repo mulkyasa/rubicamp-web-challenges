@@ -22,6 +22,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => {
     const sql = `SELECT * FROM data`;
+    
+    
+    
     db.all(sql, (err, row) => {
         if (err) {
             return console.error(err.message);
@@ -82,10 +85,5 @@ app.get('/delete/:id', (req, res) => {
         res.redirect('/');
     });
 });
-
-app.get('/filter/:id', (req, res) => {
-    const id = req.parrams.id;
-    const sql = `SELECT FROM data WHERE id = ${id}`;
-  });
 
 app.listen(port, () => console.log(`This app working on port ${port}!`));

@@ -74,15 +74,15 @@
             <div class="row">
                 <div class="col-2">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="startDate" name="check_startDate" <%= query.check_startDate ? ' checked ' : '' %>>
-                        <label class="form-check-label" for="startDate">
+                        <input class="form-check-input" type="checkbox" id="date" name="check_date" <%= query.check_date ? ' checked ' : '' %>>
+                        <label class="form-check-label" for="date">
                         Date
                         </label>
                     </div>
                 </div>
                 <div class="col-3">
                     <div class="form-group">
-                        <input type="date" class="form-control" id="startDate" name="startDate" <%= query.startDate ? ' checked ' : '' %>>
+                        <input type="date" class="form-control" id="startDate" name="startDate">
                     </div>
                 </div>
                 <div class="w-100"></div>
@@ -90,14 +90,14 @@
                 <div class="w-100"></div>
                 <div class="col-3 offset-2">
                     <div class="form-group">
-                        <input type="date" class="form-control" id="endDate" name="endDate" <%= query.endDate ? ' checked ' : '' %>>
+                        <input type="date" class="form-control" id="endDate" name="endDate">
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="boolean" name="check_boolean" <%= query.check_boolean ? ' checked ' : '' %>>
+                        <input class="form-check-input" type="checkbox" id="boolean" name="check_boolean" <%= query.check_boolean ? ' checked ' : '' %>>
                         <label class="form-check-label" for="boolean">
                         Boolean
                         </label>
@@ -105,15 +105,18 @@
                 </div>
                 <div class="col-10">
                     <div class="form-group">
-                        <select class="custom-select custom-select">
-                            <option selected>Choose the boolean ...</option>
-                            <option value="true" <%= query.check_boolean == true ? ' selected' : '' %>>true</option>
-                            <option value="false" <%= query.check_boolean == false ? ' selected' : '' %>>false</option>
+                        <select class="custom-select custom-select" id="boolean" class="boolean" name="boolean">
+                            <option disabled selected>Choose the boolean ...</option>
+                            <option value="true" <%= query.check_boolean == 'true' ? ' selected' : '' %>>true</option>
+                            <option value="false" <%= query.check_boolean == 'false' ? ' selected' : '' %>>false</option>
                         </select>
                     </div>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Search</button>
+            <a href="/">
+                <button type="submit" class="btn btn-danger">Reset</button>
+            </a>
         </form>
         <table class="table table-striped mt-4">
             <thead>

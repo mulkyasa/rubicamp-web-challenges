@@ -28,6 +28,27 @@ app.get('/', (req, res) => {
         result.push(`id = ${req.query.id}`);
         filterData = true;
     };
+    if (req.query.check_string && req.query.string) {
+        result.push(`string = '${req.query.string}'`);
+        filterData = true;
+    };
+    if (req.query.check_integer && req.query.integer) {
+        result.push(`integer = ${req.query.integer}`);
+        filterData = true;
+    };
+    if (req.query.check_float && req.query.float) {
+        result.push(`float = '${req.query.float}'`);
+        filterData = true;
+    };
+    if (req.query.check_date && req.query.startDate && req.query.endDate) {
+        result.push(`date BETWEEN '${req.query.startDate}' AND '${req.query.endDate}'`);
+        filterData = true;
+    };
+    if (req.query.check_boolean && req.query.boolean) {
+        result.push(`boolean = '${req.query.boolean}'`);
+        filterData = true;
+        console.log(req.query);
+    }
 
     let sql = `SELECT * FROM data`;
     if (filterData) {

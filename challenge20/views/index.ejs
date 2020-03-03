@@ -9,12 +9,12 @@
 <body>
     <div class = container>
         <h2>BREAD (Browse, Read, Edit, Add, Delete)</h2>
-        <form method="GET">
+        <form action="/" method="GET">
             <h4>Filters</h4>
             <div class="row">
                 <div class="col">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="id">
+                        <input class="form-check-input" type="checkbox" id="id" name="check_id" <%= query.check_id ? ' checked ' : '' %>>
                         <label class="form-check-label" for="id">
                         ID
                         </label>
@@ -22,14 +22,14 @@
                 </div>
                 <div class="col-10">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="id" placeholder="ID">
+                        <input type="text" class="form-control" id="id" name='id' placeholder="ID">
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="string">
+                        <input class="form-check-input" type="checkbox" id="string" name="check_string" <%= query.check_string ? ' checked ' : '' %>>
                         <label class="form-check-label" for="string">
                         String
                         </label>
@@ -37,14 +37,14 @@
                 </div>
                 <div class="col-10">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="string" placeholder="String">
+                        <input type="text" class="form-control" id="string" placeholder="String" name="string">
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="integer">
+                        <input class="form-check-input" type="checkbox" id="integer" name="check_integer" <%= query.check_integer ? ' checked ' : '' %>>
                         <label class="form-check-label" for="integer">
                         Integer
                         </label>
@@ -52,14 +52,14 @@
                 </div>
                 <div class="col-10">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="integer" placeholder="Integer">
+                        <input type="text" class="form-control" id="integer" placeholder="Integer" name="integer">
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="float">
+                        <input class="form-check-input" type="checkbox" id="float" name="check_float" <%= query.check_float ? ' checked ' : '' %>>
                         <label class="form-check-label" for="float">
                         Float
                         </label>
@@ -67,22 +67,22 @@
                 </div>
                 <div class="col-10">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="float" placeholder="Float">
+                        <input type="text" class="form-control" id="float" placeholder="Float" name="float">
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-2">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="date">
-                        <label class="form-check-label" for="date">
+                        <input class="form-check-input" type="checkbox" id="startDate" name="check_startDate" <%= query.check_startDate ? ' checked ' : '' %>>
+                        <label class="form-check-label" for="startDate">
                         Date
                         </label>
                     </div>
                 </div>
                 <div class="col-3">
                     <div class="form-group">
-                        <input type="date" class="form-control" id="date">
+                        <input type="date" class="form-control" id="startDate" name="startDate" <%= query.startDate ? ' checked ' : '' %>>
                     </div>
                 </div>
                 <div class="w-100"></div>
@@ -90,14 +90,14 @@
                 <div class="w-100"></div>
                 <div class="col-3 offset-2">
                     <div class="form-group">
-                        <input type="date" class="form-control">
+                        <input type="date" class="form-control" id="endDate" name="endDate" <%= query.endDate ? ' checked ' : '' %>>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="boolean">
+                        <input class="form-check-input" type="checkbox" value="" id="boolean" name="check_boolean" <%= query.check_boolean ? ' checked ' : '' %>>
                         <label class="form-check-label" for="boolean">
                         Boolean
                         </label>
@@ -107,59 +107,59 @@
                     <div class="form-group">
                         <select class="custom-select custom-select">
                             <option selected>Choose the boolean ...</option>
-                            <option value="true">true</option>
-                            <option value="false">false</option>
+                            <option value="true" <%= query.check_boolean == true ? ' selected' : '' %>>true</option>
+                            <option value="false" <%= query.check_boolean == false ? ' selected' : '' %>>false</option>
                         </select>
                     </div>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Search</button>
         </form>
-            <table class="table table-striped mt-4">
-                <thead>
+        <table class="table table-striped mt-4">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">String</th>
+                    <th scope="col">Integer</th>
+                    <th scope="col">Float</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Boolean</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% data.forEach((item) => { %>
                     <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">String</th>
-                        <th scope="col">Integer</th>
-                        <th scope="col">Float</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Boolean</th>
-                        <th scope="col">Actions</th>
+                        <th scope="row"><%= item.id %></th>
+                        <td><%= item.string %></td>
+                        <td><%= item.integer %></td>
+                        <td><%= item.float %></td>
+                        <td><%= item.date %></td>
+                        <td><%= item.boolean %></td>
+                        <td>
+                            <a href="/edit/<%= item.id %>">
+                                <button type="button" class="btn btn-success">Edit</button>
+                            </a>
+                            <a href="/delete/<%= item.id %>">
+                                <button type="button" class="btn btn-danger">Delete</button>
+                            </a>
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    <% item.forEach((item) => { %>
-                        <tr>
-                            <th scope="row"><%= item.id %></th>
-                            <td><%= item.string %></td>
-                            <td><%= item.integer %></td>
-                            <td><%= item.float %></td>
-                            <td><%= item.date %></td>
-                            <td><%= item.boolean %></td>
-                            <td>
-                                <a href="/edit/<%= item.id %>">
-                                    <button type="button" class="btn btn-success">Edit</button>
-                                </a>
-                                <a href="/delete/<%= item.id %>">
-                                    <button type="button" class="btn btn-danger">Delete</button>
-                                </a>
-                            </td>
-                        </tr>
-                    <% }); %>
-                </tbody>
-            </table>
-            <nav aria-label="Page navigation example mt-2">
-                <ul class="pagination">
-                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                </ul>
-            </nav>
-            <a href="/add/">
-                <button type="button" class="btn btn-primary mb-4">Add</button>
-            </a>
+                <% }); %>
+            </tbody>
+        </table>
+        <nav aria-label="Page navigation example mt-2">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+        </nav>
+        <a href="/add/">
+            <button type="button" class="btn btn-primary mb-4">Add</button>
+        </a>
         </div>
     </body>
 </html>

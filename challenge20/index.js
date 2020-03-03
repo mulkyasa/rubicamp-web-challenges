@@ -21,15 +21,27 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => {
-    const sql = `SELECT * FROM data`;
-    
-    
-    
+    let result = [];
+    let filterData = false;
+
+    if (req.query.check_id && req.query.id) {
+        result.push(`id = ${req.query.id}`);
+        filterData = true;
+    };
+
+    let sql = `SELECT * FROM data`;
+    if (filterData) {
+        sql = sql + ` WHERE ${result.join(' AND ')}`;
+        console.log(sql);
+    };
     db.all(sql, (err, row) => {
         if (err) {
             return console.error(err.message);
         };
-        res.render('index', {item: row});
+        res.render('index', {
+            data: row,
+            query: req.query
+        });
     });
 });
 

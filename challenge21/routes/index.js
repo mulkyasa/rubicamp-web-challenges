@@ -13,5 +13,17 @@ module.exports = pool => {
     });
   });
 
+  router.post("/", function(req, res, next) {
+    const { string, integer, float, date, boolean } = req.body;
+    const sql = `INSERT INTO data (string, integer, float, date, boolean) VALUES ('${string}', '${integer}', '${float}', '${date}', '${boolean}')`;
+    pool.query(sql, (err, item) => {
+      if (err) {
+        throw err;
+      }
+      res.status(201).json({ item: item.rows });
+    });
+  });
+
+
   return router;
 };

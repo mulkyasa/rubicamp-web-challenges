@@ -1,170 +1,260 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>BREAD (Browse, Read, Edit, Add, Delete)</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script type="text/javascript" src="/javascripts/jquery-3.4.1.min.js"></script>
-  </head>
+<%- include('partials/_header') %>
   <body>
-    <div class = container>
-      <h2>BREAD (Browse, Read, Edit, Add, Delete)</h2>
+    <div class="container">
+      <h2><%= title %></h2>
       <form action="/" method="GET">
-          <h4>Filters</h4>
-          <div class="row">
-              <div class="col">
-                  <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="id" name="check_id">
-                      <label class="form-check-label" for="id">
-                      ID
-                      </label>
-                  </div>
-              </div>
-              <div class="col-10">
-                  <div class="form-group">
-                      <input type="text" class="form-control" id="id" name='id' placeholder="ID">
-                  </div>
-              </div>
+        <h4>Filters</h4>
+        <div class="row">
+          <div class="col">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="id"
+                name="check_id"
+              />
+              <label class="form-check-label" for="id">
+                ID
+              </label>
+            </div>
           </div>
-          <div class="row">
-              <div class="col">
-                  <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="string" name="check_string">
-                      <label class="form-check-label" for="string">
-                      String
-                      </label>
-                  </div>
-              </div>
-              <div class="col-10">
-                  <div class="form-group">
-                      <input type="text" class="form-control" id="string" placeholder="String" name="string">
-                  </div>
-              </div>
+          <div class="col-10">
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                id="id"
+                name="id"
+                placeholder="ID"
+              />
+            </div>
           </div>
-          <div class="row">
-              <div class="col">
-                  <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="integer" name="check_integer">
-                      <label class="form-check-label" for="integer">
-                      Integer
-                      </label>
-                  </div>
-              </div>
-              <div class="col-10">
-                  <div class="form-group">
-                      <input type="text" class="form-control" id="integer" placeholder="Integer" name="integer">
-                  </div>
-              </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="string"
+                name="check_string"
+              />
+              <label class="form-check-label" for="string">
+                String
+              </label>
+            </div>
           </div>
-          <div class="row">
-              <div class="col">
-                  <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="float" name="check_float">
-                      <label class="form-check-label" for="float">
-                      Float
-                      </label>
-                  </div>
-              </div>
-              <div class="col-10">
-                  <div class="form-group">
-                      <input type="text" class="form-control" id="float" placeholder="Float" name="float">
-                  </div>
-              </div>
+          <div class="col-10">
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                id="string"
+                placeholder="String"
+                name="string"
+              />
+            </div>
           </div>
-          <div class="row">
-              <div class="col-2">
-                  <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="date" name="check_date">
-                      <label class="form-check-label" for="date">
-                      Date
-                      </label>
-                  </div>
-              </div>
-              <div class="col-3">
-                  <div class="form-group">
-                      <input type="date" class="form-control" id="startDate" name="startDate">
-                  </div>
-              </div>
-              <div class="w-100"></div>
-              <p class="col offset-2">to</p>
-              <div class="w-100"></div>
-              <div class="col-3 offset-2">
-                  <div class="form-group">
-                      <input type="date" class="form-control" id="endDate" name="endDate">
-                  </div>
-              </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="integer"
+                name="check_integer"
+              />
+              <label class="form-check-label" for="integer">
+                Integer
+              </label>
+            </div>
           </div>
-          <div class="row">
-              <div class="col">
-                  <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="boolean" name="check_boolean">
-                      <label class="form-check-label" for="boolean">
-                      Boolean
-                      </label>
-                  </div>
-              </div>
-              <div class="col-10">
-                  <div class="form-group">
-                      <select class="custom-select custom-select" id="boolean" class="boolean" name="boolean">
-                          <option disabled selected>Choose the boolean ...</option>
-                          <option value="true">true</option>
-                          <option value="false">false</option>
-                      </select>
-                  </div>
-              </div>
+          <div class="col-10">
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                id="integer"
+                placeholder="Integer"
+                name="integer"
+              />
+            </div>
           </div>
-          <button type="submit" class="btn btn-primary">Search</button>
-          <a href="/">
-              <button type="submit" class="btn btn-danger">Reset</button>
-          </a>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="float"
+                name="check_float"
+              />
+              <label class="form-check-label" for="float">
+                Float
+              </label>
+            </div>
+          </div>
+          <div class="col-10">
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                id="float"
+                placeholder="Float"
+                name="float"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-2">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="date"
+                name="check_date"
+              />
+              <label class="form-check-label" for="date">
+                Date
+              </label>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group">
+              <input
+                type="date"
+                class="form-control"
+                id="startDate"
+                name="startDate"
+              />
+            </div>
+          </div>
+          <div class="w-100"></div>
+          <p class="col offset-2">to</p>
+          <div class="w-100"></div>
+          <div class="col-3 offset-2">
+            <div class="form-group">
+              <input
+                type="date"
+                class="form-control"
+                id="endDate"
+                name="endDate"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="boolean"
+                name="check_boolean"
+              />
+              <label class="form-check-label" for="boolean">
+                Boolean
+              </label>
+            </div>
+          </div>
+          <div class="col-10">
+            <div class="form-group">
+              <select
+                class="custom-select custom-select"
+                id="boolean"
+                class="boolean"
+                name="boolean"
+              >
+                <option disabled selected>Choose the boolean ...</option>
+                <option value="true">true</option>
+                <option value="false">false</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+        <a href="/">
+          <button type="submit" class="btn btn-danger">Reset</button>
+        </a>
       </form>
       <table class="table table-striped mt-4">
-          <thead>
-              <tr>
-                  <th scope="col">ID</th>
-                  <th scope="col">String</th>
-                  <th scope="col">Integer</th>
-                  <th scope="col">Float</th>
-                  <th scope="col">Date</th>
-                  <th scope="col">Boolean</th>
-                  <th scope="col">Actions</th>
-              </tr>
-          </thead>
-          <tbody>
-            
-          </tbody>
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">String</th>
+            <th scope="col">Integer</th>
+            <th scope="col">Float</th>
+            <th scope="col">Date</th>
+            <th scope="col">Boolean</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
       </table>
       <a href="/add/">
-          <button type="button" class="btn btn-primary mb-4">Add</button>
+        <button type="button" class="btn btn-primary mb-4">Add</button>
       </a>
+    </div>
 
-      <script type="text/javascript">
-        const API_URL = 'http://localhost:3000/data';
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-        $(document).ready(() => {
-          loadData();
-        });
+    <script type="text/javascript">
+      const API_URL = "http://localhost:3000/api";
 
-        const loadData = () => {
-          $.ajax({
-            method: "GET",
-            url: API_URL,
-            dataType: 'json'
-          })
-          .done((data) => {
-            let html = '';
-            data.forEach((item) => {
-              html += `<tr>
-                  <td>${item.id}</td>
-                  <td>${item.string}</td>
-                  <td>${item.integer}</td>
-                  <td>${item.float}</td>
-                  <td>${item.date}</td>
-                  <td>${item.boolean}</td>
-                </tr>`
-            });
-            $('table tbody').html(html)
+      $(document).ready(() => {
+        loadData();
+      });
+
+      const loadData = () => {
+        $.ajax({
+          method: "GET",
+          url: `${API_URL}`,
+          dataType: "json"
+        }).done(result => {
+          let items = result.data;
+          let html = "";
+          items.forEach((item, index) => {
+            html += `<tr>
+                      <td>${index + 1}</td>
+                      <td>${item.string}</td>
+                      <td>${item.integer}</td>
+                      <td>${item.float}</td>
+                      <td>${item.date}</td>
+                      <td>${item.boolean}</td>
+                      <td>
+                        <a href="">
+                            <button type="button" class="btn btn-success">Edit</button>
+                        </a>
+                        <a href="">
+                            <button type="button" class="btn btn-danger">Delete</button>
+                        </a>
+                    </td>
+                  </tr>`;
           });
-        };
-      </script>
+          $("table tbody").html(html);
+        });
+      };
+      // const addData = () => {
+
+      // };
+    </script>
   </body>
 </html>

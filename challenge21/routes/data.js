@@ -6,22 +6,22 @@ module.exports = pool => {
   /* GET home page. */
   router.get("/", function(req, res, next) {
     const sqlGet = `SELECT * FROM data`;
-    pool.query(sqlGet, (err, item) => {
+    pool.query(sqlGet, (err, data) => {
       if (err) {
         throw err;
       };
-      res.status(200).json({ item: item.rows });
+      res.status(200).json({ data: data.rows });
     });
   });
 
   router.get("/:id", function(req, res, next) {
     const sqlGetById = `SELECT * FROM data WHERE id = $1`;
     const id = [req.params.id];
-    pool.query(sqlGetById, id, (err, item) => {
+    pool.query(sqlGetById, id, (err, data) => {
       if (err) {
         throw err;
       };
-      res.status(200).json({ item: item.rows });
+      res.status(200).json({ data: data.rows });
     });
   });
 
@@ -29,7 +29,7 @@ module.exports = pool => {
     const { string, integer, float, date, boolean } = req.body;
     const sqlAdd = `INSERT INTO data (string, integer, float, date, boolean) VALUES ($1, $2, $3, $4, $5)`;
     const input = [string, integer, float, date, boolean];
-    pool.query(sqlAdd, input, (err, item) => {
+    pool.query(sqlAdd, input, (err, data) => {
       if (err) {
         throw err;
       };
@@ -47,11 +47,11 @@ module.exports = pool => {
     const id = req.params.id;
     const { string, integer, float, date, boolean } = req.body;
     const sqlEdit = `UPDATE data SET string = '${string}', integer = '${integer}', float = '${float}', date = '${date}', boolean = '${boolean}' WHERE id = ${id}`;
-    pool.query(sqlEdit, (err, item) => {
+    pool.query(sqlEdit, (err, data) => {
       if (err) {
         throw err;
       };
-      res.status(201).json({ item: item.rows });
+      res.status(201).json({ data: data.rows });
     });
   });
 

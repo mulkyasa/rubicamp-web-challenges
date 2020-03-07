@@ -1,0 +1,84 @@
+<%- include('partials/_header') %>
+  <body>
+    <div class="container">
+        <h2>Add Data</h2>
+        <form action="/add" method="POST">
+            <div class="row">
+                <div class="col">
+                    <div class="form-check">
+                        <label class="form-check-label" for="string">
+                        String
+                        </label>
+                    </div>
+                </div>
+                <div class="col-10">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="string" placeholder="String" name="string">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-check">
+                        <label class="form-check-label" for="integer">
+                        Integer
+                        </label>
+                    </div>
+                </div>
+                <div class="col-10">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="integer" placeholder="Integer" name="integer">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-check">
+                        <label class="form-check-label" for="float">
+                        Float
+                        </label>
+                    </div>
+                </div>
+                <div class="col-10">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="float" placeholder="Float" name=float>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2">
+                    <div class="form-check">
+                        <label class="form-check-label" for="date">
+                        Date
+                        </label>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-group">
+                        <input type="date" class="form-control" id="date" name="date">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-check">
+                        <label class="form-check-label" for="boolean">
+                        Boolean
+                        </label>
+                    </div>
+                </div>
+                <div class="col-10">
+                    <div class="form-group">
+                        <select class="custom-select custom-select" id="boolean" name="boolean">
+                            <option selected>Choose the boolean ...</option>
+                            <option value="true">true</option>
+                            <option value="false">false</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+  </body>
+</html>

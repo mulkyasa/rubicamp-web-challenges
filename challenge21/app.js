@@ -13,7 +13,8 @@ const pool = new Pool({
   port: 5432
 })
 
-var indexRouter = require('./routes/index')(pool);
+var indexRouter = require('./routes/index');
+var dataRouter = require('./routes/data')(pool);
 
 var app = express();
 
@@ -28,6 +29,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/data', dataRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,18 +1,11 @@
 <%- include('partials/_header') %>
   <body>
     <div class="container">
-      <h2><%= title %></h2>
-      <form action="/" method="GET">
-        <h4>Filters</h4>
+      <h2>Edit Data</h2>
+      <form id="edit-form">
         <div class="row">
           <div class="col">
             <div class="form-check">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                id="id"
-                name="check_id"
-              />
               <label class="form-check-label" for="id">
                 ID
               </label>
@@ -26,6 +19,7 @@
                 id="id"
                 name="id"
                 placeholder="ID"
+                disabled
               />
             </div>
           </div>
@@ -33,12 +27,6 @@
         <div class="row">
           <div class="col">
             <div class="form-check">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                id="string"
-                name="check_string"
-              />
               <label class="form-check-label" for="string">
                 String
               </label>
@@ -59,12 +47,6 @@
         <div class="row">
           <div class="col">
             <div class="form-check">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                id="integer"
-                name="check_integer"
-              />
               <label class="form-check-label" for="integer">
                 Integer
               </label>
@@ -85,12 +67,6 @@
         <div class="row">
           <div class="col">
             <div class="form-check">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                id="float"
-                name="check_float"
-              />
               <label class="form-check-label" for="float">
                 Float
               </label>
@@ -111,12 +87,6 @@
         <div class="row">
           <div class="col-2">
             <div class="form-check">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                id="date"
-                name="check_date"
-              />
               <label class="form-check-label" for="date">
                 Date
               </label>
@@ -127,21 +97,8 @@
               <input
                 type="date"
                 class="form-control"
-                id="startDate"
-                name="startDate"
-              />
-            </div>
-          </div>
-          <div class="w-100"></div>
-          <p class="col offset-2">to</p>
-          <div class="w-100"></div>
-          <div class="col-3 offset-2">
-            <div class="form-group">
-              <input
-                type="date"
-                class="form-control"
-                id="endDate"
-                name="endDate"
+                id="date"
+                name="date"
               />
             </div>
           </div>
@@ -149,12 +106,6 @@
         <div class="row">
           <div class="col">
             <div class="form-check">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                id="boolean"
-                name="check_boolean"
-              />
               <label class="form-check-label" for="boolean">
                 Boolean
               </label>
@@ -175,28 +126,11 @@
             </div>
           </div>
         </div>
-        <button type="submit" class="btn btn-primary">Search</button>
+        <button type="submit" class="btn btn-primary">Save</button>
         <a href="/">
-          <button type="submit" class="btn btn-danger">Reset</button>
+          <button type="submit" class="btn btn-danger">Cancel</button>
         </a>
       </form>
-      <table class="table table-striped mt-4">
-        <thead>
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">String</th>
-            <th scope="col">Integer</th>
-            <th scope="col">Float</th>
-            <th scope="col">Date</th>
-            <th scope="col">Boolean</th>
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-      <a href="/add/">
-        <button type="button" class="btn btn-primary mb-4">Add</button>
-      </a>
     </div>
 
     <script
@@ -215,40 +149,5 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script type="text/javascript">
-      const API_URL = "http://localhost:3000/api";
-      $(document).ready(() => {
-        loadData();
-      });
-      const loadData = () => {
-        $.ajax({
-          method: "GET",
-          url: `${API_URL}`,
-          dataType: "json"
-        }).done(result => {
-          let items = result.data;
-          let html = "";
-          items.forEach((item, index) => {
-            html += `<tr>
-              <td>${index + 1}</td>
-              <td>${item.string}</td>
-              <td>${item.integer}</td>
-              <td>${item.float}</td>
-              <td>${item.date}</td>
-              <td>${item.boolean}</td>
-              <td>
-                <a href="/edit/${item.index}">
-                    <button type="button" class="btn btn-success">Edit</button>
-                </a>
-                <a href="">
-                    <button type="button" class="btn btn-danger">Delete</button>
-                </a>
-            </td>
-          </tr>`;
-          });
-          $("table tbody").html(html);
-        });
-      };
-    </script>
   </body>
 </html>

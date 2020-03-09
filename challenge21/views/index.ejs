@@ -430,6 +430,17 @@
           $('#modalBoolean').html(html);
         });
       };
+
+      const deleteData = (id) => {
+          $.ajax({
+            method: "DELETE",
+            url: `${API_URL}/${id}`,
+            dataType: 'json'
+          })
+          .done((result) => {
+            loadData();
+          })
+        };
     </script>
   </body>
 </html>

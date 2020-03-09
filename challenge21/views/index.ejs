@@ -2,7 +2,8 @@
   <body>
     <div class="container">
       <h2><%= title %></h2>
-      <form action="/" method="GET">
+      <form action="/" method="GET" id="form-control">
+        <input type="text" id="page" hidden></input>
         <h4>Filters</h4>
         <div class="row">
           <div class="col">
@@ -177,7 +178,7 @@
         </div>
         <button type="submit" class="btn btn-primary">Search</button>
         <a href="/">
-          <button type="submit" class="btn btn-danger">Reset</button>
+          <button type="submit" class="btn btn-secondary">Reset</button>
         </a>
       </form>
       <table class="table table-striped mt-4">
@@ -197,6 +198,148 @@
       <a href="/add/">
         <button type="button" class="btn btn-primary mb-4">Add</button>
       </a>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editModalLabel">Edit Data</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form id="edit-form">
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-2">
+                  <div class="form-check">
+                    <label class="form-check-label" for="id">
+                      ID
+                    </label>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="modalId"
+                      name="id"
+                      placeholder="ID"
+                      disabled
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-2">
+                  <div class="form-check">
+                    <label class="form-check-label" for="string">
+                      String
+                    </label>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="modalString"
+                      placeholder="String"
+                      name="string"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-2">
+                  <div class="form-check">
+                    <label class="form-check-label" for="integer">
+                      Integer
+                    </label>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="modalInteger"
+                      placeholder="Integer"
+                      name="integer"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-2">
+                  <div class="form-check">
+                    <label class="form-check-label" for="float">
+                      Float
+                    </label>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="modalFloat"
+                      placeholder="Float"
+                      name="float"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-2">
+                  <div class="form-check">
+                    <label class="form-check-label" for="date">
+                      Date
+                    </label>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <input
+                      type="date"
+                      class="form-control"
+                      id="modalDate"
+                      name="date"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-2">
+                  <div class="form-check">
+                    <label class="form-check-label" for="modalBoolean">
+                      Boolean
+                    </label>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <select
+                      class="custom-select custom-select"
+                      id="modalBoolean"
+                      class="boolean"
+                      name="boolean"
+                    >
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" id="submit-data" class="btn btn-primary" data-dismiss="modal" data-id="" data-dismiss="modal">Save changes</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script
@@ -219,34 +362,72 @@
       const API_URL = "http://localhost:3000/api";
       $(document).ready(() => {
         loadData();
+
+        $('table tbody').on('click', '.btn-edit', (event) => {
+          showData(event.currentTarget.attributes.dataid.value);
+        });
+
+        $('table tbody').on('click', '.btn-delete', (event) => {
+          deleteData(event.currentTarget.attributes.dataid.value);
+        });
       });
       const loadData = () => {
+        const data = $('#form-control').serializeArray();
         $.ajax({
           method: "GET",
           url: `${API_URL}`,
+          data: data,
           dataType: "json"
-        }).done(result => {
+        })
+        .done(result => {
           let items = result.data;
           let html = "";
-          items.forEach((item, index) => {
+          items.forEach(item => {
             html += `<tr>
-              <td>${index + 1}</td>
+              <td>${item.id}</td>
               <td>${item.string}</td>
               <td>${item.integer}</td>
               <td>${item.float}</td>
               <td>${item.date}</td>
               <td>${item.boolean}</td>
               <td>
-                <a href="/edit/${item.index}">
-                    <button type="button" class="btn btn-success">Edit</button>
-                </a>
-                <a href="">
-                    <button type="button" class="btn btn-danger">Delete</button>
-                </a>
+                <button type="button" class="btn btn-success btn-edit" dataid="${item.id}" data-toggle="modal" data-target="#editModal">Edit</button>
+                <button type="button" class="btn btn-danger btn-delete" dataid="${item.id}">Delete</button>
             </td>
           </tr>`;
           });
           $("table tbody").html(html);
+        });
+      };
+      const showData = id => {
+        $.ajax({
+          method: 'GET',
+          url: `${API_URL}/${id}`,
+          dataType: 'json'
+        })
+        .done(result => {
+          let items = result.data;
+          let pageNow = $('#page').val();
+          if(value.length == 0 && pageNow != '1') {
+            $('#page').val(pageNow -1);
+            loadData();
+          }
+          let html ='';
+          items.forEach(item => {
+            $('input#modalId').val(item.id);
+            $('input#modalString').val(item.string);
+            $('input#modalInteger').val(item.integer);
+            $('input#modalFloat').val(item.float);
+            $('input#modalDate').val(item.date);
+            if (item.boolean) {
+              html += `<option value="true" selected>true</option>
+              <option value="false">false</option>`;
+            } else {
+              html += `<option value="true">true</option>
+              <option value="false" selected>false</option>`;
+            };
+          });
+          $('#modalBoolean').html(html);
         });
       };
     </script>

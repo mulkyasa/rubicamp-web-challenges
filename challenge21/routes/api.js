@@ -45,7 +45,7 @@ module.exports = pool => {
       });
     });
   });
-
+  
   router.get("/:id", (req, res, next) => {
     const sqlGetById = `SELECT * FROM data WHERE id = $1`;
     const id = [req.params.id];

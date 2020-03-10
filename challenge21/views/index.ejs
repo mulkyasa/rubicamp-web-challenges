@@ -2,7 +2,7 @@
   <body>
     <div class="container">
       <h2><%= title %></h2>
-      <form action="/" method="GET" id="form-control">
+      <form id="search">
         <h4>Filters</h4>
         <div class="row">
           <div class="col">
@@ -177,7 +177,7 @@
         </div>
         <button type="submit" class="btn btn-primary">Search</button>
         <a href="/">
-          <button type="submit" class="btn btn-secondary">Reset</button>
+          <button type="button" class="btn btn-secondary">Reset</button>
         </a>
       </form>
       <table class="table table-striped mt-4">
@@ -197,6 +197,12 @@
       <a href="/add/">
         <button type="button" class="btn btn-primary mb-4">Add</button>
       </a>
+    </div>
+    <div class="container">
+      <nav aria-label="Page navigation mt-2">
+        <ul class="pagination">
+        </ul>
+      </nav>
     </div>
 
     <!-- Edit Modal -->
@@ -362,7 +368,10 @@
       $(document).ready(() => {
         loadData();
 
-        $('#search')
+        $('#search').submit((event) => {
+          event.preventDefault();
+          loadData();
+        });
 
         $('table tbody').on('click', '.btn-edit', (event) => {
           showData(event.currentTarget.attributes.dataid.value);
@@ -377,6 +386,24 @@
           saveData(event.currentTarget.attributes.dataid.value);
           loadData();
         })
+
+        $('ul.pagination').on('click', '.previous', (event) => {
+        let page = $('#page').val();
+        $('#page').val(parseInt(page) - 1);
+        loadData();
+        });
+
+        $('ul.pagination').on('click', '.pageNow', (event) => {
+        let page = $('#page').val();
+        $('#page').val($(event.currentTarget).attr('data-page'));
+        loadData();
+        });
+
+        $('ul.pagination').on('click', '.next', (event) => {
+        let page = $('#page').val();
+        $('#page').val(parseInt(page) + 1);
+        loadData();
+        });
       });
 
       const saveData = (id) => {
@@ -403,9 +430,12 @@
       };
 
       const loadData = () => {
+        const filter = $('#search').serializeArray();
+        console.log(filter);
         $.ajax({
           method: "GET",
           url: `${API_URL}`,
+          data : filter,
           dataType: "json"
         })
         .done(result => {
@@ -426,6 +456,18 @@
           </tr>`;
           });
           $("table tbody").html(html);
+          let currentPage = result.currentPage;
+          let totalPage = result.totalPage;
+          let url = result.url;
+          let pagination =
+            `<li class="page-item ${currentPage <=1 ? ' disabled' : ''}"><button class="page-link previous" tabindex="-1" aria-disabled="true">Previous</button></li>\n`;
+          for (let i = 1; i <= totalPage; i++) {
+            pagination +=
+              `<li class="page-item ${currentPage == i ? 'active': ''}"><button class="page-link pageNow" data-page='${i}'>${i}</button></li>\n`
+          }
+          pagination +=
+            `<li class="page-item ${currentPage >= totalPage ? ' disabled' : ''}"><button class="page-link next">Next</button></li>`;
+          $('nav ul').html(pagination);
         });
       };
       const showData = id => {

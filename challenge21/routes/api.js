@@ -4,19 +4,45 @@ var router = express.Router();
 module.exports = pool => {
 
   /* GET home page. */
-  router.get("/", function(req, res, next) {
-    const sqlGet = `SELECT * FROM data ORDER BY id`;
-
+  router.get("/", (req, res, next) => {
     // pagination
-    // const limit = 5;
-    // const currentPage = parseInt(req.query.page) || 1;
-    // const offset = parseInt(currentPage - 1) * limit;
+    const limit = 3;
+    const currentPage = parseInt(req.query.page) || 1;
+    const offset = parseInt(currentPage - 1) * limit;
+
+    // filter
+    let sqlGet = 'SELECT * from data';
+    let result = [];
+
+    if (req.query.check_id && req.query.id) {
+      result.push(`id = ${req.query.id}`);
+    };
+    if (result.length > 0) {
+      sqlGet += ` WHERE ${result.join(' AND ')}`
+    };
 
     pool.query(sqlGet, (err, data) => {
-      if (err) {
-        throw err;
-      };
-      res.status(200).json({ data: data.rows });
+      if (err) return res.send(err);
+
+      const totalRows = data.rows.length === undefined ? 0 : data.rows.length;
+      const totalPage = Math.ceil(totalRows / limit)
+      const url = req.url == '/' ? '/?page=1' : req.url;
+
+      sqlGet += ` limit ${limit} offset ${offset}`;
+
+      pool.query(sqlGet, (err, data) => {
+        if (err) {
+          throw err;
+        };
+        res.status(200).json({
+          data: data.rows,
+          query: req.query,
+          offset,
+          totalPage,
+          currentPage,
+          url
+        });
+      });
     });
   });
 
@@ -27,7 +53,7 @@ module.exports = pool => {
       if (err) {
         throw err;
       };
-      res.status(200).json({ data: data.rows });
+      res.status(200).json({ result, data: data.rows });
     });
   });
 

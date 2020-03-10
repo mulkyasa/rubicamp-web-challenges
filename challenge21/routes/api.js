@@ -17,9 +17,26 @@ module.exports = pool => {
     if (req.query.check_id && req.query.id) {
       result.push(`id = ${req.query.id}`);
     };
+    if (req.query.check_string && req.query.string) {
+      result.push(`string = '${req.query.string}'`);
+    };
+    if (req.query.check_integer && req.query.integer) {
+      result.push(`integer = '${req.query.integer}'`);
+    };
+    if (req.query.check_float && req.query.float) {
+      result.push(`float = '${req.query.float}'`);
+    };
+    if (req.query.check_date && req.query.startDate && req.query.endDate) {
+      result.push(`date BETWEEN '${req.query.startDate}' AND '${req.query.endDate}'`);
+    };
+    if (req.query.check_boolean && req.query.boolean) {
+      result.push(`boolean = '${req.query.boolean}'`);
+    };
     if (result.length > 0) {
       sqlGet += ` WHERE ${result.join(' AND ')}`
     };
+
+    sqlGet += ` ORDER BY id`;
 
     pool.query(sqlGet, (err, data) => {
       if (err) return res.send(err);
@@ -28,7 +45,7 @@ module.exports = pool => {
       const totalPage = Math.ceil(totalRows / limit)
       const url = req.url == '/' ? '/?page=1' : req.url;
 
-      sqlGet += ` limit ${limit} offset ${offset}`;
+      sqlGet += ` LIMIT ${limit} OFFSET ${offset}`;
 
       pool.query(sqlGet, (err, data) => {
         if (err) {
@@ -45,7 +62,7 @@ module.exports = pool => {
       });
     });
   });
-  
+
   router.get("/:id", (req, res, next) => {
     const sqlGetById = `SELECT * FROM data WHERE id = $1`;
     const id = [req.params.id];
@@ -53,7 +70,7 @@ module.exports = pool => {
       if (err) {
         throw err;
       };
-      res.status(200).json({ result, data: data.rows });
+      res.status(200).json({ data: data.rows });
     });
   });
 

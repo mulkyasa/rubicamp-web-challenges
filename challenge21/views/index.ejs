@@ -195,7 +195,7 @@
         <tbody></tbody>
       </table>
       <a href="/add/">
-        <button type="button" class="btn btn-primary mb-4">Add</button>
+        <button type="button" class="btn btn-primary mb-4">Add Data</button>
       </a>
     </div>
     <div class="container">
@@ -385,7 +385,7 @@
           event.preventDefault();
           saveData(event.currentTarget.attributes.dataid.value);
           loadData();
-        })
+        });
 
         $('ul.pagination').on('click', '.previous', (event) => {
         let page = $('#page').val();
@@ -460,10 +460,10 @@
           let totalPage = result.totalPage;
           let url = result.url;
           let pagination =
-            `<li class="page-item ${currentPage <=1 ? ' disabled' : ''}"><button class="page-link previous" tabindex="-1" aria-disabled="true">Previous</button></li>\n`;
+            `<li class="page-item ${currentPage <= 1 ? ' disabled' : ''}"><button class="page-link previous" tabindex="-1" aria-disabled="true">Previous</button></li>\n`;
           for (let i = 1; i <= totalPage; i++) {
             pagination +=
-              `<li class="page-item ${currentPage == i ? 'active': ''}"><button class="page-link pageNow" data-page='${i}'>${i}</button></li>\n`
+              `<li class="page-item ${currentPage == i ? 'active': ''}"><button class="page-link pageNow" data-page="${i}">${i}</button></li>\n`
           }
           pagination +=
             `<li class="page-item ${currentPage >= totalPage ? ' disabled' : ''}"><button class="page-link next">Next</button></li>`;
@@ -508,7 +508,6 @@
           loadData();
         })
       };
-
 
     </script>
   </body>

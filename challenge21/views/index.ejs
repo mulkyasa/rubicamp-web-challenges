@@ -3,6 +3,7 @@
     <div class="container">
       <h2><%= title %></h2>
       <form id="search">
+        <input type="hidden" id="page" name="page" value="1">
         <h4>Filters</h4>
         <div class="row">
           <div class="col">
@@ -394,15 +395,16 @@
         });
 
         $('ul.pagination').on('click', '.pageNow', (event) => {
-        let page = $('#page').val();
-        $('#page').val($(event.currentTarget).attr('data-page'));
-        loadData();
-        });
+          let page = $('#page').val();
+          $('#page').val($(event.currentTarget).attr('data-page'));
+          loadData();
+          });
 
         $('ul.pagination').on('click', '.next', (event) => {
-        let page = $('#page').val();
-        $('#page').val(parseInt(page) + 1);
-        loadData();
+          console.log(event);
+          let page = $('#page').val();
+          $('#page').val(parseInt(page) + 1);
+          loadData();
         });
       });
 

@@ -362,6 +362,8 @@
       $(document).ready(() => {
         loadData();
 
+        $('#search')
+
         $('table tbody').on('click', '.btn-edit', (event) => {
           showData(event.currentTarget.attributes.dataid.value);
         });

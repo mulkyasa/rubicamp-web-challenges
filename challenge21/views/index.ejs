@@ -3,7 +3,6 @@
     <div class="container">
       <h2><%= title %></h2>
       <form action="/" method="GET" id="form-control">
-        <input type="text" id="page" hidden></input>
         <h4>Filters</h4>
         <div class="row">
           <div class="col">
@@ -201,7 +200,7 @@
     </div>
 
     <!-- Edit Modal -->
-    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -334,9 +333,9 @@
               </div>
             </div>
           </form>
-          <div class="modal-footer">
+          <div class="modal-footer btn-add">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" id="submit-data" class="btn btn-primary" data-dismiss="modal" data-id="" data-dismiss="modal">Save changes</button>
+            <button type="submit" id="submit-data" class="btn btn-primary btn-save" dataid="" data-dismiss="modal">Save changes</button>
           </div>
         </div>
       </div>
@@ -370,13 +369,41 @@
         $('table tbody').on('click', '.btn-delete', (event) => {
           deleteData(event.currentTarget.attributes.dataid.value);
         });
+
+        $('.btn-add').on('click', '.btn-save', (event) => {
+          event.preventDefault();
+          saveData(event.currentTarget.attributes.dataid.value);
+          loadData();
+        })
       });
+
+      const saveData = (id) => {
+        $.ajax({
+          method: 'PUT',
+          url: `${API_URL}/${id}`,
+          data: {
+            id: `${id}`,
+            string: $('#modalString').val(),
+            integer: $('#modalInteger').val(),
+            float: $('#modalFloat').val(),
+            date: $('#modalDate').val(),
+            boolean: $('#modalBoolean').val()
+          },
+          dataType: 'json'
+        })
+        .done((result) => {
+          loadData();
+          // $('#editModal').modal('hide')
+        })
+        .fail((err) => {
+          console.log('Terjadi error', err);
+        })
+      };
+
       const loadData = () => {
-        const data = $('#form-control').serializeArray();
         $.ajax({
           method: "GET",
           url: `${API_URL}`,
-          data: data,
           dataType: "json"
         })
         .done(result => {
@@ -407,19 +434,15 @@
         })
         .done(result => {
           let items = result.data;
-          let pageNow = $('#page').val();
-          if(value.length == 0 && pageNow != '1') {
-            $('#page').val(pageNow -1);
-            loadData();
-          }
           let html ='';
           items.forEach(item => {
+            $('#submit-data').attr('dataid', item.id);
             $('input#modalId').val(item.id);
             $('input#modalString').val(item.string);
             $('input#modalInteger').val(item.integer);
             $('input#modalFloat').val(item.float);
             $('input#modalDate').val(item.date);
-            if (item.boolean) {
+            if (item.boolean == 'true') {
               html += `<option value="true" selected>true</option>
               <option value="false">false</option>`;
             } else {
@@ -431,16 +454,18 @@
         });
       };
 
-      const deleteData = (id) => {
-          $.ajax({
-            method: "DELETE",
-            url: `${API_URL}/${id}`,
-            dataType: 'json'
-          })
-          .done((result) => {
-            loadData();
-          })
-        };
+      const deleteData = id => {
+        $.ajax({
+          method: "DELETE",
+          url: `${API_URL}/${id}`,
+          dataType: 'json'
+        })
+        .done((result) => {
+          loadData();
+        })
+      };
+
+
     </script>
   </body>
 </html>

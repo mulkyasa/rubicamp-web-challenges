@@ -5,7 +5,13 @@ module.exports = pool => {
 
   /* GET home page. */
   router.get("/", function(req, res, next) {
-    const sqlGet = `SELECT * FROM data`;
+    const sqlGet = `SELECT * FROM data ORDER BY id`;
+
+    // pagination
+    // const limit = 5;
+    // const currentPage = parseInt(req.query.page) || 1;
+    // const offset = parseInt(currentPage - 1) * limit;
+
     pool.query(sqlGet, (err, data) => {
       if (err) {
         throw err;
@@ -14,7 +20,7 @@ module.exports = pool => {
     });
   });
 
-  router.get("/:id", function(req, res, next) {
+  router.get("/:id", (req, res, next) => {
     const sqlGetById = `SELECT * FROM data WHERE id = $1`;
     const id = [req.params.id];
     pool.query(sqlGetById, id, (err, data) => {
@@ -25,7 +31,7 @@ module.exports = pool => {
     });
   });
 
-  router.post("/", function(req, res, next) {
+  router.post("/", (req, res, next) => {
     const { string, integer, float, date, boolean } = req.body;
     const sqlAdd = `INSERT INTO data (string, integer, float, date, boolean) VALUES ($1, $2, $3, $4, $5)`;
     const input = [string, integer, float, date, boolean];
@@ -43,19 +49,15 @@ module.exports = pool => {
     });
   });
 
-  router.put("/:id", function(req, res, next) {
-    const id = req.params.id;
-    const { string, integer, float, date, boolean } = req.body;
-    const sqlEdit = `UPDATE data SET string = '${string}', integer = '${integer}', float = '${float}', date = '${date}', boolean = '${boolean}' WHERE id = ${id}`;
-    pool.query(sqlEdit, (err, data) => {
-      if (err) {
-        throw err;
-      };
-      res.status(201).json({ data: data.rows });
-    });
+  router.put('/:id', (req, res, next) => {
+    pool.query(`UPDATE data SET string = $2 , integer = $3 , float = $4, date = $5 , boolean = $6 WHERE id = $1`,
+      [req.params.id, req.body.string, req.body.integer, req.body.float, req.body.date, req.body.boolean], (err, data) => {
+        if (err) return res.send(err);
+        res.json(data);
+      });
   });
 
-  router.delete("/:id", function(req, res, next) {
+  router.delete("/:id", (req, res, next) => {
     const id = req.params.id;
     const sqlDelete = `DELETE FROM data WHERE id = ${id}`;
     pool.query(sqlDelete, (err) => {
@@ -63,7 +65,7 @@ module.exports = pool => {
         throw err;
       };
       res.status(201).json({
-        id
+        id,
       });
     });
   });

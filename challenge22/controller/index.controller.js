@@ -8,10 +8,22 @@ const getData = (req, res) => {
     let querySearch = {}
     // logic filter
     if (input.check_string && input.string) {
-        querySearch.string = input.string
-    }
+        querySearch.string = req.query.string
+    };
+    if (input.check_integer && input.integer) {
+      querySearch.integer = req.query.integer
+    };
+    if (input.check_float && input.float) {
+      querySearch.float = req.query.float
+    };
+    if (input.check_date) {
+      querySearch.date = {$gte: req.query.startDate, $lte: req.query.endDate}
+    };
+    if (input.check_boolean && req.query.boolean) {
+      querySearch.boolean = req.query.boolean
+    };
 
-  dataModels.find((err, data) => {
+  dataModels.find(querySearch, (err, data) => {
     if (err) {
       console.error(err.message);
     };

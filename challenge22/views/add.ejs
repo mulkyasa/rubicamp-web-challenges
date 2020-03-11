@@ -1,0 +1,161 @@
+<%- include('partials/_header') %>
+  <body>
+    <div class="container">
+      <h2>Add Data</h2>
+      <form id="add-form">
+        <div class="row">
+          <div class="col">
+            <div class="form-check">
+              <label class="form-check-label" for="string">
+                String
+              </label>
+            </div>
+          </div>
+          <div class="col-10">
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                id="string"
+                placeholder="String"
+                name="string"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-check">
+              <label class="form-check-label" for="integer">
+                Integer
+              </label>
+            </div>
+          </div>
+          <div class="col-10">
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                id="integer"
+                placeholder="Integer"
+                name="integer"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-check">
+              <label class="form-check-label" for="float">
+                Float
+              </label>
+            </div>
+          </div>
+          <div class="col-10">
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                id="float"
+                placeholder="Float"
+                name="float"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-2">
+            <div class="form-check">
+              <label class="form-check-label" for="date">
+                Date
+              </label>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group">
+              <input
+                type="date"
+                class="form-control"
+                id="date"
+                name="date"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-check">
+              <label class="form-check-label" for="boolean">
+                Boolean
+              </label>
+            </div>
+          </div>
+          <div class="col-10">
+            <div class="form-group">
+              <select
+                class="custom-select custom-select"
+                id="boolean"
+                class="boolean"
+                name="boolean"
+              >
+                <option disabled selected>Choose the boolean ...</option>
+                <option value="true">true</option>
+                <option value="false">false</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </form>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      const API_URL = 'http://localhost:3000/api';
+      $(document).ready(() => {
+        $('#add-form').submit((event) => {
+          event.preventDefault();
+          addData();
+        });
+        const addData = () => {
+          $.ajax({
+            method: 'POST',
+            url: `${API_URL}`,
+            data: {
+              string: $('#string').val(),
+              integer: $('#integer').val(),
+              float: $('#float').val(),
+              date: $('#date').val(),
+              boolean: $('#boolean').val()
+            },
+            dataType: 'json'
+          })
+          .done((items) => {
+            $('index').val('');
+            $('#string').val('');
+            $('#integer').val('');
+            $('#float').val('');
+            $('#date').val('');
+            $('#boolean').val('');
+            location.replace('/');
+          });
+        };
+      });
+    </script>
+  </body>
+</html>

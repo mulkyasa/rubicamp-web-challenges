@@ -152,7 +152,7 @@
         </div>
         <button type="submit" class="btn btn-primary">Search</button>
         <a href="/">
-          <button type="button" class="btn btn-secondary">Reset</button>
+          <button type="button" class="btn btn-info">Reset</button>
         </a>
       </form>
       <table class="table table-striped mt-4">
@@ -410,7 +410,6 @@
           let item = result.result;
           let html ='';
           $('#submit-data').attr('dataid', item._id);
-          $('input#modalId').val(item._id);
           $('input#modalString').val(item.string);
           $('input#modalInteger').val(item.integer);
           $('input#modalFloat').val(item.float);

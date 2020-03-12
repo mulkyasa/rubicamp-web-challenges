@@ -5,7 +5,7 @@ moment.locale('id');
 const getData = (req, res) => {
   // logic filter
   let querySearch = {}
-  // logic filter
+
   if (req.query.check_string && req.query.string) {
       querySearch.string = req.query.string
   };
@@ -22,13 +22,27 @@ const getData = (req, res) => {
     querySearch.boolean = req.query.boolean
   };
 
+  // pagination
+  const page = req.query.page || 1;
+  const limit = 3;
+  const offset = (page - 1) * limit;
+  const url = req.url === '/' ? '/?page=1' : req.url;
+
   dataModels.find(querySearch, (err, data) => {
-    if (err) {
-      console.error(err.message);
-    };
-    res.json({
-      result: data
-    });
+    let totalData = data.length;
+    dataModels.find(querySearch, (err, data) => {
+      if (err) {
+        console.error(err.message);
+      };
+      res.json({
+        result: data,
+        url,
+        page,
+        pages: Math.ceil(totalData / limit),
+        query: req.query
+      });
+    })
+    .skip(offset).limit(limit);
   });
 };
 
